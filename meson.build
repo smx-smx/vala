@@ -1,0 +1,110 @@
+project('vala',
+	'c', 'vala',
+	version: '0.37.90',
+	meson_version: '>= 0.42.0',
+	license: 'LGPL2.1'
+)
+
+vala_version_required = '0.16.1'
+vala = meson.get_compiler('vala')
+if not vala.version().version_compare('>= @0@'.format(vala_version_required))
+	error('valac >= @0@ required!'.format(vala_version_required))
+endif
+
+vala_version = meson.project_version()
+vala_api_version = '0.38'
+vala_version_suffix = '-@0@'.format(vala_api_version)
+
+
+conf = configuration_data()
+conf.set_quoted('PACKAGE', meson.project_name())
+conf.set_quoted('PACKAGE_BUGREPORT', 'https://bugzilla.gnome.org/browse.cgi?product=vala')
+conf.set_quoted('PACKAGE_DATADIR', join_paths(get_option('prefix'), get_option('datadir'), 'vala@0@'.format(vala_version_suffix)))
+conf.set_quoted('PACKAGE_NAME', meson.project_name())
+conf.set_quoted('PACKAGE_STRING', '@0@ @1@'.format(meson.project_name(), vala_version))
+conf.set_quoted('PACKAGE_SUFFIX', vala_version_suffix)
+conf.set_quoted('PACKAGE_TARNAME', meson.project_name())
+conf.set_quoted('PACKAGE_URL', 'https://wiki.gnome.org/Projects/Vala')
+conf.set_quoted('PACKAGE_VERSION', vala_version)
+conf.set_quoted('VERSION', vala_version)
+conf.set_quoted('API_VERSION', vala_api_version)
+conf.set_quoted('BUILD_VERSION', vala_version)
+configure_file(input: 'config.h.meson', output: 'config.h', configuration: conf)
+
+
+vcs_tag(input: 'version.h.meson', output: 'version.h')
+
+
+pkgconf = configuration_data()
+pkgconf.set('prefix', get_option('prefix'))
+pkgconf.set('exec_prefix', '${prefix}')
+pkgconf.set('libdir', '${prefix}/@0@'.format(get_option('libdir')))
+pkgconf.set('bindir', '${exec_prefix}/@0@'.format(get_option('bindir')))
+pkgconf.set('datarootdir', '${prefix}/@0@'.format(get_option('datadir')))
+pkgconf.set('datadir', '${datarootdir}')
+pkgconf.set('includedir', '${prefix}/@0@'.format(get_option('includedir')))
+pkgconf.set('PACKAGE_SUFFIX', vala_version_suffix)
+pkgconf.set('VERSION', vala_version)
+pkg_install_dir = '@0@/pkgconfig'.format(get_option('libdir'))
+
+configure_file(
+	input: 'libvala.pc.in',
+	output: 'libvala@0@.pc'.format(vala_version_suffix),
+	configuration: pkgconf,
+	install_dir: pkg_install_dir
+)
+
+add_project_arguments([
+		'--disable-version-header',
+		'--hide-internal',
+		'--vapidir', join_paths(meson.source_root(), 'vapi'),
+		'--pkg', 'config',
+	],
+	language: 'vala'
+)
+
+add_project_arguments([
+		'-Wno-discarded-qualifiers',
+		'-Wno-incompatible-pointer-types',
+		'-Wno-unused',
+		'-DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_40',
+		'-DGLIB_VERSION_MAX_ALLOWED=GLIB_VERSION_2_40',
+	],
+	language: 'c',
+)
+
+glib_version_required = '2.40.0'
+libgvc_version_required = '2.16'
+
+glib_dep = dependency('glib-2.0', version: '>= @0@'.format(glib_version_required))
+gobject_dep = dependency('gobject-2.0', version: '>= @0@'.format(glib_version_required))
+gmodule_dep = dependency('gmodule-2.0', version: '>= @0@'.format(glib_version_required))
+libgvc_dep = dependency('libgvc', version: '>= @0@'.format(libgvc_version_required))
+
+# Check for CGraph support of libgvc
+cc = meson.get_compiler('c')
+if cc.run('''#include <gvc.h>
+		int main(void) {
+		#ifdef WITH_CGRAPH
+			return 0;
+		#else
+			return -1;
+		#endif
+		}''',
+		dependencies: libgvc_dep).returncode() == 0
+	add_project_arguments('-D', 'WITH_CGRAPH', language: 'vala')
+endif
+
+subdir('gobject-introspection')
+subdir('gee')
+subdir('vala')
+subdir('ccode')
+subdir('codegen')
+subdir('compiler')
+subdir('vapigen')
+subdir('libvaladoc')
+subdir('valadoc')
+subdir('vapi')
+subdir('doc')
+
+install_data('vala.m4', install_dir: 'share/aclocal')
