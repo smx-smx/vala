@@ -98,7 +98,12 @@ PKG_CHECK_MODULES(GMODULE, gmodule-2.0 >= $GLIB_REQUIRED)
 AC_SUBST(GMODULE_CFLAGS)
 AC_SUBST(GMODULE_LIBS)
 
-PKG_CHECK_MODULES(LIBGVC, libgvc >= $LIBGVC_REQUIRED)
+AC_ARG_WITH([valadoc], AS_HELP_STRING([--with-valadoc], [Build libvaladoc]))
+
+if test "x$with_valadoc" = "xyes"; then
+	PKG_CHECK_MODULES(LIBGVC, libgvc >= $LIBGVC_REQUIRED)
+fi
+
 AC_MSG_CHECKING([for CGRAPH])
 cgraph_tmp_LIBADD="$LIBADD"
 cgraph_tmp_CFLAGS="$CFLAGS"
