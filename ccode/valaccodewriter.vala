@@ -160,7 +160,10 @@ public class Vala.CCodeWriter {
 				using_line_directive = true;
 			} else if (using_line_directive) {
 				// no corresponding Vala line, emit line directive for C line
-				write_string ("#line %d \"%s\"".printf (current_line_number + 1, Path.get_basename (filename)));
+				string path = Path.get_basename (filename);
+				path = path.replace("\\", "/");
+
+				write_string ("#line %d \"%s\"".printf (current_line_number + 1, path));
 				write_newline ();
 				using_line_directive = false;
 			}

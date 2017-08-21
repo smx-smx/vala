@@ -38,6 +38,8 @@ public class Vala.CCodeLineDirective : CCodeNode {
 	
 	public CCodeLineDirective (string _filename, int _line) {
 		filename = _filename;
+		filename = filename.replace("\\", "/");
+
 		line_number = _line;
 	}
 
