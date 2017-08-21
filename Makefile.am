@@ -3,7 +3,11 @@ ACLOCAL_AMFLAGS = --install -I m4 ${ACLOCAL_FLAGS}
 NULL =
 
 if HAVE_CGRAPH
-	MAYBE_VALADOC = libvaladoc valadoc
+MAYBE_VALADOC = libvaladoc valadoc
+endif
+
+if ENABLE_DOC
+MAYBE_DOC = doc
 endif
 
 SUBDIRS = \
@@ -14,9 +18,9 @@ SUBDIRS = \
 	compiler \
 	vapi \
 	tests \
-	doc \
 	gobject-introspection \
 	vapigen \
+	$(MAYBE_DOC) \
 	$(MAYBE_VALADOC) \
 	$(NULL)
 

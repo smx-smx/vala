@@ -100,6 +100,9 @@ AC_SUBST(GMODULE_LIBS)
 
 AC_ARG_WITH([valadoc], AS_HELP_STRING([--with-valadoc], [Build libvaladoc]))
 
+AC_ARG_ENABLE(doc, AS_HELP_STRING([--enable-doc], [Build documentation]), enable_doc=$enableval, enable_doc=no)
+AM_CONDITIONAL(ENABLE_DOC, test x$enable_doc = xyes)
+
 if test "x$with_valadoc" = "xyes"; then
 	PKG_CHECK_MODULES(LIBGVC, libgvc >= $LIBGVC_REQUIRED)
 fi
