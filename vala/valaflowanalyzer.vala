@@ -391,13 +391,6 @@ public class Vala.FlowAnalyzer : CodeVisitor {
 		}
 	}
 
-	bool is_ignorable_struct(Variable variable){
-		var st = variable.variable_type.data_type as Struct;
-				
-		// TODO: should this check if this struct type has a default_value CCode?
-		return st != null && st.is_simple_type();
-	}
-
 	void check_variables (BasicBlock entry_block) {
 		var_map = new HashMap<Symbol, List<Variable>>();
 		used_vars = new HashSet<Variable> ();
@@ -417,9 +410,6 @@ public class Vala.FlowAnalyzer : CodeVisitor {
 			if (phi != null) {
 				foreach (Variable variable in phi.operands) {
 					if (variable == null) {
-						if (is_ignorable_struct(used_var))
-							continue;
-						
 						if (used_var is LocalVariable) {
 							Report.error (used_var.source_reference, "use of possibly unassigned local variable `%s'".printf (used_var.name));
 						} else {
@@ -452,9 +442,6 @@ public class Vala.FlowAnalyzer : CodeVisitor {
 			foreach (Variable var_symbol in used_variables) {
 				var variable_stack = var_map.get (var_symbol);
 				if (variable_stack == null || variable_stack.size == 0) {
-					if (is_ignorable_struct(var_symbol))
-						continue;
-
 					if (var_symbol is LocalVariable) {
 						Report.error (node.source_reference, "use of possibly unassigned local variable `%s'".printf (var_symbol.name));
 					} else {
