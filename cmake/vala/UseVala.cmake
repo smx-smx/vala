@@ -110,7 +110,7 @@
 include(CMakeParseArguments)
 
 function(vala_precompile output)
-    cmake_parse_arguments(ARGS "" "DIRECTORY;LIBRARY;GENERATE_HEADER;GENERATE_VAPI"
+    cmake_parse_arguments(ARGS "" "VALA_EXECUTABLE;DIRECTORY;LIBRARY;GENERATE_HEADER;GENERATE_VAPI"
         "SOURCES;PACKAGES;OPTIONS;DEFINITIONS;CUSTOM_VAPIS" ${ARGN})
 
     if(ARGS_DIRECTORY)
@@ -175,9 +175,14 @@ function(vala_precompile output)
         set(library_name "--library=${ARGS_LIBRARY}")
     endif(ARGS_LIBRARY)
 
+    set(local_vala_executable ${VALA_EXECUTABLE})
+    if(ARGS_VALA_EXECUTABLE)
+        set(local_vala_executable ${ARGS_VALA_EXECUTABLE})
+    endif()
+
     add_custom_command(OUTPUT ${out_files} 
     COMMAND 
-        ${VALA_EXECUTABLE} 
+        ${local_vala_executable}
     ARGS 
         "-C" 
         ${library_name}

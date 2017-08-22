@@ -1,4 +1,6 @@
-set(VALA_EXECUTABLE ${CMAKE_BINARY_DIR}/compiler/valac${CMAKE_EXECUTABLE_SUFFIX})
+# The "all tests" target, depending on valac
+set(VALA_TESTS "vala_all_tests")
+add_custom_target(${VALA_TESTS} ALL DEPENDS valac)
 
 set(CTEST_TESTING_TIMEOUT 15)
 
@@ -85,7 +87,12 @@ function(define_vala_test target_name)
 		LIST(APPEND ${OPTIONS} ${ARGS_OPTIONS})
 	endif()
 
+	# The valac executable we just built
+	set(VALAC_PATH $<TARGET_FILE:valac>)
+
 	vala_precompile(VALA_C
+		VALA_EXECUTABLE
+			${VALAC_PATH}
 		SOURCES
 			${ARGS_SOURCES} ${ARGS_UNPARSED_ARGUMENTS}
 		PACKAGES
@@ -106,6 +113,9 @@ function(define_vala_test target_name)
 	add_executable(${target_name} ${VALA_C})
 	target_include_directories(${target_name} PUBLIC ${INCLUDE_DIRS})
 	target_link_libraries(${target_name} ${LINK_LIBS})
+
+	# Add this test to the "all tests" target
+	add_dependencies(${VALA_TESTS} ${target_name})
 
 	string (REPLACE ";" " " FLAGS_STR "${FLAGS}")
 	set_target_properties(${target_name} PROPERTIES COMPILE_FLAGS "${FLAGS_STR}")
