@@ -100,6 +100,9 @@ function(define_vala_test target_name)
 			${ARGS_GENERATE_HEADER}
 	)
 
+	# Add "test_" prefix
+	set(target_name "test_${target_name}")
+
 	add_executable(${target_name} ${VALA_C})
 	target_include_directories(${target_name} PUBLIC ${INCLUDE_DIRS})
 	target_link_libraries(${target_name} ${LINK_LIBS})
