@@ -4,8 +4,6 @@ add_custom_target(${VALA_TESTS} ALL DEPENDS valac)
 
 set(CTEST_TESTING_TIMEOUT 15)
 
-pkg_check_modules(GIO REQUIRED gio-2.0>=${GLIB_VERSION})
-
 set(TEST_DIRS
 	annotations
 	asynchronous
@@ -22,6 +20,11 @@ set(TEST_DIRS
 	objects
 	pointers
 	structs
+)
+
+# Tests to skip on Windows
+set(WIN32_SKIP
+	dbus/enum-string-marshalling
 )
 
 function(define_vala_test target_name)
@@ -66,6 +69,11 @@ function(define_vala_test target_name)
 		-Werror=redundant-decls
 		-Werror=int-conversion
 	)
+
+	if(WIN32)
+		list(APPEND OPTIONS -D WIN32)
+		list(APPEND PACKAGES gio-windows-2.0)
+	endif()
 
 	# Extra include directories
 	if(ARGS_INCLUDE_DIRS)
@@ -154,6 +162,12 @@ foreach(testdir ${TEST_DIRS})
 	file(GLOB tests RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/${testdir}/*.vala")
 	foreach(test_src ${tests})
 		get_filename_component(name ${test_src} NAME_WE)
+
+		# Should we skip this test?
+		if(WIN32 AND ${testdir}/${name} IN_LIST WIN32_SKIP)
+			continue()
+		endif()
+
 		define_vala_test(${testdir}_${name} ${test_src}
 			DIRECTORY
 		)

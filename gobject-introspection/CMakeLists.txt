@@ -46,8 +46,8 @@ set(GI_SOURCES
 add_executable(gen-introspect ${GI_SOURCES})
 target_link_libraries(gen-introspect
 	${GLIB_LIBRARIES}
-	${GMODULE_LIBRARIES}
 	${GOBJECT_LIBRARIES}
+	${GMODULE_LIBRARIES}
 	gidl
 )
 

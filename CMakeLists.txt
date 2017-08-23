@@ -1,9 +1,10 @@
-cmake_minimum_required(VERSION 2.8) #unsure about this
+cmake_minimum_required(VERSION 3.3)
 
 project(Vala C)
 set(VALA_VERSION 0.38)
 
 list(APPEND CMAKE_MODULE_PATH
+	${CMAKE_SOURCE_DIR}/cmake
 	${CMAKE_SOURCE_DIR}/cmake/vala
 )
 
@@ -13,6 +14,8 @@ endif()
 
 include(FindVala)
 include(UseVala)
+
+include(Utils)
 
 include(CheckIncludeFiles)
 include(CMakeDependentOption)
@@ -31,11 +34,18 @@ pkg_check_modules(GOBJECT REQUIRED gobject-2.0>=${GLIB_VERSION})
 pkg_check_modules(GMODULE REQUIRED gmodule-2.0>=${GLIB_VERSION})
 pkg_check_modules(LIBGVC libgvc>=${LIBGVC_VERSION})
 
+pkg_check_modules(GIO REQUIRED gio-2.0>=${GLIB_VERSION})
+if(WIN32)
+	pkg_check_modules(GIO_WINDOWS REQUIRED gio-windows-2.0>=${GLIB_VERSION})
+endif()
+
 include_directories(
 	${GLIB_INCLUDE_DIRS}
 	${GMODULE_INCLUDE_DIRS}
 	${GOBJECT_INCLUDE_DIRS}
 	${LIBGVC_INCLUDE_DIRS}
+	${GIO_INCLUDE_DIRS}
+	${GIO_WINDOWS_INCLUDE_DIRS}
 )
 
 link_directories(
@@ -43,12 +53,21 @@ link_directories(
 	${GMODULE_LIBRARY_DIRS}
 	${GOBJECT_LIBRARY_DIRS}
 	${LIBGVC_LIBRARY_DIRS}
+	${GIO_LIBRARY_DIRS}
+	${GIO_WINDOWS_LIBRARY_DIRS}
 )
 
 option(ENABLE_DOC "Set to ON to build documentation" OFF)
 option(ENABLE_LIBVALADOC, "Set to ON to build libvaladoc" OFF)
 option(ENABLE_TESTS "Set to ON to build and run tests" OFF)
+option(GENERATE_VAPIS "Set to ON to generate vapi files" OFF)
 set(VALA_BUILD_VERSION "UNKNOWN" CACHE STRING "Build Version (will appear in --version)")
+
+# Vala looks VAPIs up in the install prefix
+# Default to an in-tree build if no install prefix was specified
+if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+    set (CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}" CACHE PATH "default install path" FORCE )
+endif()
 
 if(ENABLE_DOC)
 	set(ENABLE_LIBVALADOC ON)
@@ -77,7 +96,11 @@ add_subdirectory(ccode)
 add_subdirectory(vala)
 add_subdirectory(codegen)
 add_subdirectory(compiler)
-add_subdirectory(vapi)
+add_subdirectory(vapigen)
+
+if(GENERATE_VAPIS)
+	add_subdirectory(vapi)
+endif()
 
 if(ENABLE_DOC)
 	add_subdirectory(doc)
@@ -88,5 +111,3 @@ if(ENABLE_TESTS)
 	enable_testing()
 	add_subdirectory(tests)
 endif()
-
-add_subdirectory(vapigen)

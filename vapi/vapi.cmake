@@ -1,0 +1,560 @@
+add_vapi(atk
+	"${VAPI_METADATA_DIR}/Atk-1.0-custom.vala"
+	"${VAPI_GIR_DIR}/Atk-1.0.gir"
+	PACKAGES 
+)
+add_vapi(atspi-2
+	"${VAPI_METADATA_DIR}/Atspi-2.0-custom.vala"
+	"${VAPI_GIR_DIR}/Atspi-2.0.gir"
+	PACKAGES 
+)
+add_vapi(clutter-1.0
+	"${VAPI_METADATA_DIR}/Clutter-1.0-custom.vala"
+	"${VAPI_GIR_DIR}/Clutter-1.0.gir"
+	PACKAGES atk cairo pango cogl-1.0 cogl-pango-1.0 json-glib-1.0
+)
+add_vapi(clutter-gdk-1.0
+	"${VAPI_GIR_DIR}/ClutterGdk-1.0.gir"
+	PACKAGES clutter-1.0 gdk-3.0
+)
+add_vapi(clutter-gtk-0.10
+	"${VAPI_PACKAGES_DIR}/clutter-gtk-0.10/clutter-gtk-0.10.gi"
+	PACKAGES 
+)
+add_vapi(clutter-gtk-1.0
+	"${VAPI_METADATA_DIR}/GtkClutter-1.0-custom.vala"
+	"${VAPI_GIR_DIR}/GtkClutter-1.0.gir"
+	PACKAGES clutter-1.0 gtk+-3.0 cogl-pango-1.0
+)
+add_vapi(clutter-gst-1.0
+	"${VAPI_METADATA_DIR}/ClutterGst-1.0-custom.vala"
+	"${VAPI_GIR_DIR}/ClutterGst-1.0.gir"
+	PACKAGES clutter-1.0 gstreamer-base-0.10 gstreamer-video-0.10 gstreamer-interfaces-0.10 gstreamer-audio-0.10
+)
+add_vapi(clutter-gst-2.0
+	"${VAPI_METADATA_DIR}/ClutterGst-2.0-custom.vala"
+	"${VAPI_GIR_DIR}/ClutterGst-2.0.gir"
+	PACKAGES cogl-1.0 clutter-1.0 gstreamer-base-1.0 gstreamer-video-1.0
+)
+add_vapi(clutter-gst-3.0
+	"${VAPI_METADATA_DIR}/ClutterGst-3.0-custom.vala"
+	"${VAPI_GIR_DIR}/ClutterGst-3.0.gir"
+	PACKAGES cogl-1.0 clutter-1.0 gdk-pixbuf-2.0 gstreamer-1.0 gstreamer-audio-1.0 gstreamer-base-1.0 gstreamer-pbutils-1.0 gstreamer-video-1.0
+)
+add_vapi(clutter-x11-1.0
+	"${VAPI_GIR_DIR}/ClutterX11-1.0.gir"
+	PACKAGES clutter-1.0 x11
+)
+add_vapi(cogl-1.0
+	"${VAPI_PACKAGES_DIR}/cogl-1.0/cogl-1.0-custom.vala"
+	"${VAPI_PACKAGES_DIR}/cogl-1.0/cogl-1.0.gi"
+	PACKAGES 
+)
+add_vapi(cogl-pango-1.0
+	"${VAPI_GIR_DIR}/CoglPango-1.0.gir"
+	PACKAGES cogl-1.0 pango
+)
+add_vapi(gconf-2.0
+	"${VAPI_PACKAGES_DIR}/gconf-2.0/gconf-2.0.gi"
+	PACKAGES 
+)
+add_vapi(geocode-glib-1.0
+	"${VAPI_GIR_DIR}/GeocodeGlib-1.0.gir"
+	PACKAGES 
+)
+add_vapi(gdk-2.0
+	"${VAPI_PACKAGES_DIR}/gdk-2.0/gdk-2.0-custom.vala"
+	"${VAPI_PACKAGES_DIR}/gdk-2.0/gdk-2.0.gi"
+	PACKAGES 
+)
+add_vapi(gdk-3.0
+	"${VAPI_METADATA_DIR}/Gdk-3.0-custom.vala"
+	"${VAPI_GIR_DIR}/Gdk-3.0.gir"
+	PACKAGES gio-2.0
+)
+add_vapi(gdk-pixbuf-2.0
+	"${VAPI_METADATA_DIR}/GdkPixbuf-2.0-custom.vala"
+	"${VAPI_GIR_DIR}/GdkPixbuf-2.0.gir"
+	PACKAGES gio-2.0
+)
+add_vapi(gdk-x11-2.0
+	"${VAPI_PACKAGES_DIR}/gdk-x11-2.0/gdk-x11-2.0-custom.vala"
+	"${VAPI_PACKAGES_DIR}/gdk-x11-2.0/gdk-x11-2.0.gi"
+	PACKAGES 
+)
+add_vapi(gdk-x11-3.0
+	"${VAPI_METADATA_DIR}/GdkX11-3.0-custom.vala"
+	"${VAPI_GIR_DIR}/GdkX11-3.0.gir"
+	PACKAGES gio-2.0 gdk-3.0 x11
+)
+add_vapi(gdl-1.0
+	"${VAPI_PACKAGES_DIR}/gdl-1.0/gdl-1.0-custom.vala"
+	"${VAPI_PACKAGES_DIR}/gdl-1.0/gdl-1.0.gi"
+	PACKAGES 
+)
+add_vapi(gdl-3.0
+	"${VAPI_GIR_DIR}/Gdl-3.gir"
+	PACKAGES gio-2.0 gtk+-3.0
+)
+add_vapi(gdu
+	"${VAPI_PACKAGES_DIR}/gdu/gdu.gi"
+	PACKAGES 
+)
+add_vapi(gdu-gtk
+	"${VAPI_PACKAGES_DIR}/gdu-gtk/gdu-gtk.gi"
+	PACKAGES 
+)
+add_vapi(gedit-2.20
+	"${VAPI_PACKAGES_DIR}/gedit-2.20/gedit-2.20.gi"
+	PACKAGES 
+)
+add_vapi(gedit
+	"Gedit-3.0.gir"
+	PACKAGES 
+)
+add_vapi(gio-2.0
+	"${VAPI_METADATA_DIR}/Gio-2.0-custom.vala"
+	"${VAPI_GIR_DIR}/Gio-2.0.gir"
+	PACKAGES 
+)
+add_vapi(gio-unix-2.0
+	"${VAPI_PACKAGES_DIR}/gio-unix-2.0/gio-unix-2.0-custom.vala"
+	"${VAPI_PACKAGES_DIR}/gio-unix-2.0/gio-unix-2.0.gi"
+	PACKAGES 
+)
+add_vapi(gnome-desktop-2.0
+	"${VAPI_PACKAGES_DIR}/gnome-desktop-2.0/gnome-desktop-2.0.gi"
+	PACKAGES 
+)
+add_vapi(gnome-keyring-1
+	"${VAPI_PACKAGES_DIR}/gnome-keyring-1/gnome-keyring-1-custom.vala"
+	"${VAPI_PACKAGES_DIR}/gnome-keyring-1/gnome-keyring-1.gi"
+	PACKAGES 
+)
+add_vapi(gnome-vfs-2.0
+	"${VAPI_PACKAGES_DIR}/gnome-vfs-2.0/gnome-vfs-2.0-custom.vala"
+	"${VAPI_PACKAGES_DIR}/gnome-vfs-2.0/gnome-vfs-2.0.gi"
+	PACKAGES 
+)
+add_vapi(gobject-introspection-1.0
+	"${VAPI_METADATA_DIR}/GIRepository-2.0-custom.vala"
+	"${VAPI_GIR_DIR}/GIRepository-2.0.gir"
+	PACKAGES 
+)
+add_vapi(goocanvas
+	"${VAPI_PACKAGES_DIR}/goocanvas/goocanvas-custom.vala"
+	"${VAPI_PACKAGES_DIR}/goocanvas/goocanvas.gi"
+	PACKAGES 
+)
+add_vapi(graphene-1.0
+	"${VAPI_GIR_DIR}/Graphene-1.0.gir"
+	PACKAGES gobject-2.0
+)
+add_vapi(gstreamer-0.10
+	"${VAPI_PACKAGES_DIR}/gstreamer-0.10/gstreamer-0.10-custom.vala"
+	"${VAPI_PACKAGES_DIR}/gstreamer-0.10/gstreamer-0.10.gi"
+	PACKAGES 
+)
+add_vapi(gstreamer-app-0.10
+	"${VAPI_PACKAGES_DIR}/gstreamer-app-0.10/gstreamer-app-0.10.gi"
+	PACKAGES 
+)
+add_vapi(gstreamer-audio-0.10
+	"${VAPI_PACKAGES_DIR}/gstreamer-audio-0.10/gstreamer-audio-0.10.gi"
+	PACKAGES 
+)
+add_vapi(gstreamer-base-0.10
+	"${VAPI_PACKAGES_DIR}/gstreamer-base-0.10/gstreamer-base-0.10-custom.vala"
+	"${VAPI_PACKAGES_DIR}/gstreamer-base-0.10/gstreamer-base-0.10.gi"
+	PACKAGES 
+)
+add_vapi(gstreamer-cdda-0.10
+	"${VAPI_PACKAGES_DIR}/gstreamer-cdda-0.10/gstreamer-cdda-0.10-custom.vala"
+	"${VAPI_PACKAGES_DIR}/gstreamer-cdda-0.10/gstreamer-cdda-0.10.gi"
+	PACKAGES 
+)
+add_vapi(gstreamer-check-0.10
+	"${VAPI_PACKAGES_DIR}/gstreamer-check-0.10/gstreamer-check-0.10.gi"
+	PACKAGES 
+)
+add_vapi(gstreamer-controller-0.10
+	"${VAPI_PACKAGES_DIR}/gstreamer-controller-0.10/gstreamer-controller-0.10-custom.vala"
+	"${VAPI_PACKAGES_DIR}/gstreamer-controller-0.10/gstreamer-controller-0.10.gi"
+	PACKAGES 
+)
+add_vapi(gstreamer-dataprotocol-0.10
+	"${VAPI_PACKAGES_DIR}/gstreamer-dataprotocol-0.10/gstreamer-dataprotocol-0.10-custom.vala"
+	"${VAPI_PACKAGES_DIR}/gstreamer-dataprotocol-0.10/gstreamer-dataprotocol-0.10.gi"
+	PACKAGES 
+)
+add_vapi(gstreamer-fft-0.10
+	"${VAPI_PACKAGES_DIR}/gstreamer-fft-0.10/gstreamer-fft-0.10.gi"
+	PACKAGES 
+)
+add_vapi(gstreamer-interfaces-0.10
+	"${VAPI_PACKAGES_DIR}/gstreamer-interfaces-0.10/gstreamer-interfaces-0.10-custom.vala"
+	"${VAPI_PACKAGES_DIR}/gstreamer-interfaces-0.10/gstreamer-interfaces-0.10.gi"
+	PACKAGES 
+)
+add_vapi(gstreamer-net-0.10
+	"${VAPI_PACKAGES_DIR}/gstreamer-net-0.10/gstreamer-net-0.10.gi"
+	PACKAGES 
+)
+add_vapi(gstreamer-netbuffer-0.10
+	"${VAPI_PACKAGES_DIR}/gstreamer-netbuffer-0.10/gstreamer-netbuffer-0.10.gi"
+	PACKAGES 
+)
+add_vapi(gstreamer-pbutils-0.10
+	"${VAPI_PACKAGES_DIR}/gstreamer-pbutils-0.10/gstreamer-pbutils-0.10-custom.vala"
+	"${VAPI_PACKAGES_DIR}/gstreamer-pbutils-0.10/gstreamer-pbutils-0.10.gi"
+	PACKAGES 
+)
+add_vapi(gstreamer-riff-0.10
+	"${VAPI_PACKAGES_DIR}/gstreamer-riff-0.10/gstreamer-riff-0.10.gi"
+	PACKAGES 
+)
+add_vapi(gstreamer-rtp-0.10
+	"${VAPI_PACKAGES_DIR}/gstreamer-rtp-0.10/gstreamer-rtp-0.10.gi"
+	PACKAGES 
+)
+add_vapi(gstreamer-rtsp-0.10
+	"${VAPI_PACKAGES_DIR}/gstreamer-rtsp-0.10/gstreamer-rtsp-0.10-custom.vala"
+	"${VAPI_PACKAGES_DIR}/gstreamer-rtsp-0.10/gstreamer-rtsp-0.10.gi"
+	PACKAGES 
+)
+add_vapi(gstreamer-sdp-0.10
+	"${VAPI_PACKAGES_DIR}/gstreamer-sdp-0.10/gstreamer-sdp-0.10.gi"
+	PACKAGES 
+)
+add_vapi(gstreamer-tag-0.10
+	"${VAPI_PACKAGES_DIR}/gstreamer-tag-0.10/gstreamer-tag-0.10.gi"
+	PACKAGES 
+)
+add_vapi(gstreamer-video-0.10
+	"${VAPI_PACKAGES_DIR}/gstreamer-video-0.10/gstreamer-video-0.10-custom.vala"
+	"${VAPI_PACKAGES_DIR}/gstreamer-video-0.10/gstreamer-video-0.10.gi"
+	PACKAGES 
+)
+add_vapi(gstreamer-1.0
+	"${VAPI_METADATA_DIR}/Gst-1.0-custom.vala"
+	"${VAPI_GIR_DIR}/Gst-1.0.gir"
+	PACKAGES 
+)
+add_vapi(gstreamer-allocators-1.0
+	"${VAPI_GIR_DIR}/GstAllocators-1.0.gir"
+	PACKAGES gstreamer-1.0
+)
+add_vapi(gstreamer-app-1.0
+	"${VAPI_GIR_DIR}/GstApp-1.0.gir"
+	PACKAGES gstreamer-base-1.0
+)
+add_vapi(gstreamer-audio-1.0
+	"${VAPI_GIR_DIR}/GstAudio-1.0.gir"
+	PACKAGES gstreamer-base-1.0
+)
+add_vapi(gstreamer-bad-allocators-1.0
+	"${VAPI_GIR_DIR}/GstBadAllocators-1.0.gir"
+	PACKAGES gstreamer-1.0
+)
+add_vapi(gstreamer-base-1.0
+	"${VAPI_METADATA_DIR}/GstBase-1.0-custom.vala"
+	"${VAPI_GIR_DIR}/GstBase-1.0.gir"
+	PACKAGES gstreamer-1.0
+)
+add_vapi(gstreamer-check-1.0
+	"${VAPI_METADATA_DIR}/GstCheck-1.0-custom.vala"
+	"${VAPI_GIR_DIR}/GstCheck-1.0.gir"
+	PACKAGES gstreamer-1.0
+)
+add_vapi(gstreamer-fft-1.0
+	"${VAPI_METADATA_DIR}/GstFft-1.0-custom.vala"
+	"${VAPI_GIR_DIR}/GstFft-1.0.gir"
+	PACKAGES gstreamer-1.0
+)
+add_vapi(gstreamer-controller-1.0
+	"${VAPI_GIR_DIR}/GstController-1.0.gir"
+	PACKAGES gstreamer-1.0
+)
+add_vapi(gstreamer-net-1.0
+	"${VAPI_GIR_DIR}/GstNet-1.0.gir"
+	PACKAGES gstreamer-1.0 gio-2.0
+)
+add_vapi(gstreamer-pbutils-1.0
+	"${VAPI_GIR_DIR}/GstPbutils-1.0.gir"
+	PACKAGES gstreamer-base-1.0
+)
+add_vapi(gstreamer-player-1.0
+	"${VAPI_GIR_DIR}/GstPlayer-1.0.gir"
+	PACKAGES gstreamer-1.0 gstreamer-video-1.0
+)
+add_vapi(gstreamer-riff-1.0
+	"${VAPI_GIR_DIR}/GstRiff-1.0.gir"
+	PACKAGES gstreamer-1.0
+)
+add_vapi(gstreamer-rtp-1.0
+	"${VAPI_GIR_DIR}/GstRtp-1.0.gir"
+	PACKAGES gstreamer-base-1.0
+)
+add_vapi(gstreamer-rtsp-1.0
+	"${VAPI_GIR_DIR}/GstRtsp-1.0.gir"
+	PACKAGES gstreamer-sdp-1.0
+)
+add_vapi(gstreamer-rtsp-server-1.0
+	"${VAPI_GIR_DIR}/GstRtspServer-1.0.gir"
+	PACKAGES gstreamer-rtsp-1.0 gstreamer-net-1.0
+)
+add_vapi(gstreamer-sdp-1.0
+	"${VAPI_GIR_DIR}/GstSdp-1.0.gir"
+	PACKAGES gstreamer-1.0
+)
+add_vapi(gstreamer-tag-1.0
+	"${VAPI_GIR_DIR}/GstTag-1.0.gir"
+	PACKAGES gstreamer-base-1.0
+)
+add_vapi(gstreamer-video-1.0
+	"${VAPI_METADATA_DIR}/GstVideo-1.0-custom.vala"
+	"${VAPI_GIR_DIR}/GstVideo-1.0.gir"
+	PACKAGES gstreamer-base-1.0
+)
+add_vapi(gtk+-2.0
+	"${VAPI_PACKAGES_DIR}/gtk+-2.0/gtk+-2.0-custom.vala"
+	"${VAPI_PACKAGES_DIR}/gtk+-2.0/gtk+-2.0.gi"
+	PACKAGES 
+)
+add_vapi(gtk+-3.0
+	"${VAPI_PACKAGES_DIR}/gtk+-3.0/gtk+-3.0-custom.vala"
+	"${VAPI_PACKAGES_DIR}/gtk+-3.0/gtk+-3.0.gi"
+	PACKAGES 
+)
+add_vapi(gtk+-4.0
+	PACKAGES atk cairo gdk-pixbuf-2.0 gio-2.0 graphene-1.0 pango x11
+)
+add_vapi(gtk+-unix-print-2.0
+	"${VAPI_PACKAGES_DIR}/gtk+-unix-print-2.0/gtk+-unix-print-2.0-custom.vala"
+	"${VAPI_PACKAGES_DIR}/gtk+-unix-print-2.0/gtk+-unix-print-2.0.gi"
+	PACKAGES 
+)
+add_vapi(gtk+-unix-print-3.0
+	"${VAPI_PACKAGES_DIR}/gtk+-unix-print-3.0/gtk+-unix-print-3.0-custom.vala"
+	"${VAPI_PACKAGES_DIR}/gtk+-unix-print-3.0/gtk+-unix-print-3.0.gi"
+	PACKAGES 
+)
+add_vapi(gtk+-unix-print-4.0
+	"${VAPI_PACKAGES_DIR}/gtk+-unix-print-4.0/gtk+-unix-print-4.0-custom.vala"
+	"${VAPI_PACKAGES_DIR}/gtk+-unix-print-4.0/gtk+-unix-print-4.0.gi"
+	PACKAGES 
+)
+add_vapi(gtksourceview-2.0
+	"${VAPI_PACKAGES_DIR}/gtksourceview-2.0/gtksourceview-2.0.gi"
+	PACKAGES 
+)
+add_vapi(gtksourceview-3.0
+	"${VAPI_GIR_DIR}/GtkSource-3.0.gir"
+	PACKAGES atk gdk-3.0 gdk-pixbuf-2.0 gio-2.0 gtk+-3.0 pango cairo
+)
+add_vapi(gudev-1.0
+	"${VAPI_METADATA_DIR}/GUdev-1.0-custom.vala"
+	"${VAPI_GIR_DIR}/GUdev-1.0.gir"
+	PACKAGES 
+)
+add_vapi(hildon-1
+	"${VAPI_PACKAGES_DIR}/hildon-1/hildon-1-custom.vala"
+	"${VAPI_PACKAGES_DIR}/hildon-1/hildon-1.gi"
+	PACKAGES 
+)
+add_vapi(hildon-fm-2
+	"${VAPI_PACKAGES_DIR}/hildon-fm-2/hildon-fm-2.gi"
+	PACKAGES 
+)
+add_vapi(json-glib-1.0
+	"${VAPI_METADATA_DIR}/Json-1.0-custom.vala"
+	"${VAPI_GIR_DIR}/Json-1.0.gir"
+	PACKAGES gio-2.0
+)
+add_vapi(libepc-1.0
+	"${VAPI_PACKAGES_DIR}/libepc-1.0/libepc-1.0.gi"
+	PACKAGES 
+)
+add_vapi(libgda-4.0
+	"${VAPI_PACKAGES_DIR}/libgda-4.0/libgda-4.0-custom.vala"
+	"${VAPI_PACKAGES_DIR}/libgda-4.0/libgda-4.0.gi"
+	PACKAGES 
+)
+add_vapi(libgda-report-4.0
+	"${VAPI_PACKAGES_DIR}/libgda-report-4.0/libgda-report-4.0.gi"
+	PACKAGES 
+)
+add_vapi(libgdata
+	"${VAPI_GIR_DIR}/GData-0.0.gir"
+	PACKAGES 
+)
+add_vapi(libglade-2.0
+	"${VAPI_PACKAGES_DIR}/libglade-2.0/libglade-2.0.gi"
+	PACKAGES 
+)
+add_vapi(libgnome-2.0
+	"${VAPI_PACKAGES_DIR}/libgnome-2.0/libgnome-2.0.gi"
+	PACKAGES 
+)
+add_vapi(libgnome-menu
+	"${VAPI_PACKAGES_DIR}/libgnome-menu/libgnome-menu-custom.vala"
+	"${VAPI_PACKAGES_DIR}/libgnome-menu/libgnome-menu.gi"
+	PACKAGES 
+)
+add_vapi(libgnome-menu-3.0
+	"${VAPI_GIR_DIR}/GMenu-3.0.gir"
+	PACKAGES gio-unix-2.0 gtk+-3.0
+)
+add_vapi(libgnomeui-2.0
+	"${VAPI_PACKAGES_DIR}/libgnomeui-2.0/libgnomeui-2.0-custom.vala"
+	"${VAPI_PACKAGES_DIR}/libgnomeui-2.0/libgnomeui-2.0.gi"
+	PACKAGES 
+)
+add_vapi(libgrss
+	"${VAPI_GIR_DIR}/Grss-0.7.gir"
+	PACKAGES gio-2.0 libsoup-2.4 libxml-2.0
+)
+add_vapi(libgsf-1
+	"${VAPI_PACKAGES_DIR}/libgsf-1/libgsf-1-custom.vala"
+	"${VAPI_PACKAGES_DIR}/libgsf-1/libgsf-1.gi"
+	PACKAGES 
+)
+add_vapi(libnotify
+	"${VAPI_GIR_DIR}/Notify-0.7.gir"
+	PACKAGES gdk-pixbuf-2.0 gio-2.0
+)
+add_vapi(liboobs-1
+	"${VAPI_PACKAGES_DIR}/liboobs-1/liboobs-1.gi"
+	PACKAGES 
+)
+add_vapi(libpeas-1.0
+	"${VAPI_GIR_DIR}/Peas-1.0.gir"
+	PACKAGES gio-2.0
+)
+add_vapi(libpeas-gtk-1.0
+	"${VAPI_GIR_DIR}/PeasGtk-1.0.gir"
+	PACKAGES libpeas-1.0 gtk+-3.0
+)
+add_vapi(librsvg-2.0
+	"${VAPI_METADATA_DIR}/Rsvg-2.0-custom.vala"
+	"${VAPI_GIR_DIR}/Rsvg-2.0.gir"
+	PACKAGES gdk-pixbuf-2.0 gio-2.0
+)
+add_vapi(libsexy
+	"${VAPI_PACKAGES_DIR}/libsexy/libsexy.gi"
+	PACKAGES 
+)
+add_vapi(libsoup-2.2
+	"${VAPI_PACKAGES_DIR}/libsoup-2.2/libsoup-2.2.gi"
+	PACKAGES 
+)
+add_vapi(libsoup-2.4
+	"${VAPI_METADATA_DIR}/Soup-2.4-custom.vala"
+	"${VAPI_GIR_DIR}/Soup-2.4.gir"
+	PACKAGES gio-2.0
+)
+add_vapi(libwnck-1.0
+	"${VAPI_PACKAGES_DIR}/libwnck-1.0/libwnck-1.0.gi"
+	PACKAGES 
+)
+add_vapi(libwnck-3.0
+	"${VAPI_GIR_DIR}/Wnck-3.0.gir"
+	PACKAGES gio-2.0 gtk+-3.0
+)
+add_vapi(loudmouth-1.0
+	"${VAPI_PACKAGES_DIR}/loudmouth-1.0/loudmouth-1.0-custom.vala"
+	"${VAPI_PACKAGES_DIR}/loudmouth-1.0/loudmouth-1.0.gi"
+	PACKAGES 
+)
+add_vapi(mx-1.0
+	"${VAPI_METADATA_DIR}/Mx-1.0-custom.vala"
+	"${VAPI_GIR_DIR}/Mx-1.0.gir"
+	PACKAGES clutter-1.0 cogl-pango-1.0
+)
+add_vapi(packagekit-glib2
+	"${VAPI_GIR_DIR}/PackageKitGlib-1.0.gir"
+	PACKAGES gio-2.0
+)
+add_vapi(pango
+	"${VAPI_METADATA_DIR}/Pango-1.0-custom.vala"
+	"${VAPI_GIR_DIR}/Pango-1.0.gir"
+	PACKAGES 
+)
+add_vapi(pangocairo
+	"${VAPI_GIR_DIR}/PangoCairo-1.0.gir"
+	PACKAGES 
+)
+add_vapi(polkit-agent-1
+	"${VAPI_GIR_DIR}/PolkitAgent-1.0.gir"
+	PACKAGES gio-2.0 polkit-gobject-1
+)
+add_vapi(polkit-gobject-1
+	"${VAPI_GIR_DIR}/Polkit-1.0.gir"
+	PACKAGES gio-2.0
+)
+add_vapi(poppler-glib
+	"${VAPI_GIR_DIR}/Poppler-0.18.gir"
+	PACKAGES cairo gio-2.0
+)
+add_vapi(purple
+	"${VAPI_PACKAGES_DIR}/purple/purple-custom.vala"
+	"${VAPI_PACKAGES_DIR}/purple/purple.gi"
+	PACKAGES 
+)
+add_vapi(rest-0.6
+	"${VAPI_PACKAGES_DIR}/rest-0.6/rest-0.6-custom.vala"
+	"${VAPI_PACKAGES_DIR}/rest-0.6/rest-0.6.gi"
+	PACKAGES 
+)
+add_vapi(rest-extras-0.6
+	"${VAPI_PACKAGES_DIR}/rest-extras-0.6/rest-extras-0.6-custom.vala"
+	"${VAPI_PACKAGES_DIR}/rest-extras-0.6/rest-extras-0.6.gi"
+	PACKAGES 
+)
+add_vapi(rest-0.7
+	"${VAPI_GIR_DIR}/Rest-0.7.gir"
+	PACKAGES gio-2.0
+)
+add_vapi(rest-extras-0.7
+	"${VAPI_GIR_DIR}/RestExtras-0.7.gir"
+	PACKAGES rest-0.7
+)
+add_vapi(tracker-indexer-module-1.0
+	"${VAPI_PACKAGES_DIR}/tracker-indexer-module-1.0/tracker-indexer-module-1.0-custom.vala"
+	"${VAPI_PACKAGES_DIR}/tracker-indexer-module-1.0/tracker-indexer-module-1.0.gi"
+	PACKAGES 
+)
+add_vapi(twitter-glib-1.0
+	"${VAPI_PACKAGES_DIR}/twitter-glib-1.0/twitter-glib-1.0.gi"
+	PACKAGES 
+)
+add_vapi(udisks2
+	"${VAPI_GIR_DIR}/UDisks-2.0.gir"
+	PACKAGES gio-2.0
+)
+add_vapi(unique-1.0
+	"${VAPI_PACKAGES_DIR}/unique-1.0/unique-1.0.gi"
+	PACKAGES 
+)
+add_vapi(vte
+	"${VAPI_PACKAGES_DIR}/vte/vte.gi"
+	PACKAGES 
+)
+add_vapi(vte-2.90
+	"${VAPI_METADATA_DIR}/Vte-2.90-custom.vala"
+	"${VAPI_GIR_DIR}/Vte-2.90.gir"
+	PACKAGES atk gdk-3.0 gtk+-3.0 gio-2.0 pango
+)
+add_vapi(webkit-1.0
+	"${VAPI_PACKAGES_DIR}/webkit-1.0/webkit-1.0.gi"
+	PACKAGES 
+)
+add_vapi(webkit2gtk-4.0
+	"${VAPI_GIR_DIR}/WebKit2-4.0.gir"
+	PACKAGES gtk+-3.0 libsoup-2.4
+)
+add_vapi(webkit2gtk-web-extension-4.0
+	"${VAPI_METADATA_DIR}/WebKit2WebExtension-4.0-custom.vala"
+	"${VAPI_GIR_DIR}/WebKit2WebExtension-4.0.gir"
+	PACKAGES gtk+-3.0
+)
