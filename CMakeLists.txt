@@ -60,8 +60,13 @@ link_directories(
 option(ENABLE_DOC "Set to ON to build documentation" OFF)
 option(ENABLE_LIBVALADOC, "Set to ON to build libvaladoc" OFF)
 option(ENABLE_TESTS "Set to ON to build and run tests" OFF)
+option(ENABLE_GPROF "Set to ON to enable gprof" OFF)
 option(GENERATE_VAPIS "Set to ON to generate vapi files" OFF)
 set(VALA_BUILD_VERSION "UNKNOWN" CACHE STRING "Build Version (will appear in --version)")
+
+if(ENABLE_GPROF)
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pg")
+endif()
 
 # Vala looks VAPIs up in the install prefix
 # Default to an in-tree build if no install prefix was specified
