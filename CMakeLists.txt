@@ -23,8 +23,8 @@ include(CTest)
 
 find_package(Vala REQUIRED)
 find_package(PkgConfig REQUIRED)
-find_package(Bison REQUIRED)
-find_package(Flex REQUIRED)
+find_package(BISON REQUIRED)
+find_package(FLEX REQUIRED)
 
 set(GLIB_VERSION 2.40.0)
 set(LIBGVC_VERSION 2.16)
