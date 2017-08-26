@@ -120,6 +120,29 @@ public class Vala.CCodeAssignmentModule : CCodeMemberAccessModule {
 			cexpr = new CCodeCastExpression (cexpr, get_ctype (lvalue));
 		}
 
+		/*
+		 * If this is a SimpleType struct being passed by value
+		 * and the user specified a custom user function
+		 * use the specified function instead to do assignments rather than dest = source
+		 */
+		var st_left = lvalue.value_type.data_type as Struct;
+		var st_right = value.value_type.data_type as Struct;
+		if(
+			st_left != null &&
+			st_right != null &&
+			lvalue.value_type.compatible (value.value_type) &&
+			st_left.is_simple_type() &&
+			lvalue.value_type is StructValueType &&
+			get_ccode_copy_function(st_left) != ""
+		){
+			//copy_function (src, dest)
+			var copy_call = new CCodeFunctionCall (new CCodeIdentifier (get_ccode_copy_function (st_left)));
+			copy_call.add_argument(get_cvalue_ (value));
+			copy_call.add_argument(get_cvalue_ (lvalue));
+			ccode.add_expression (copy_call);
+			return;
+		}
+
 		ccode.add_assignment (get_cvalue_ (lvalue), cexpr);
 
 		if (array_type != null && ((GLibValue) lvalue).array_length_cvalues != null) {
