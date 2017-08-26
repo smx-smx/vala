@@ -118,11 +118,18 @@ function(define_vala_test target_name)
 	set(target_name "test_${target_name}")
 
 	add_executable(${target_name} ${VALA_C})
-	target_include_directories(${target_name} PUBLIC ${INCLUDE_DIRS})
+	target_include_directories(${target_name} PUBLIC
+		${INCLUDE_DIRS}
+		${CMAKE_CURRENT_SOURCE_DIR}
+	)
 	target_link_libraries(${target_name} ${LINK_LIBS})
 	target_compile_definitions(${target_name} PUBLIC
 		GETTEXT_PACKAGE="valac"
 	)
+
+	if(ARGS_DIRECTORY)
+		target_include_directories(${target_name} PUBLIC ${ARGS_DIRECTORY})
+	endif()
 
 	# Add this test to the "all tests" target
 	add_dependencies(${VALA_TESTS} ${target_name})
@@ -161,17 +168,23 @@ endmacro()
 
 ## Discover tests
 foreach(testdir ${TEST_DIRS})
-	file(GLOB tests RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/${testdir}/*.vala")
+	file(GLOB_RECURSE tests RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/${testdir}/*.vala")
 	foreach(test_src ${tests})
 		get_filename_component(name ${test_src} NAME_WE)
+		get_filename_component(test_dir ${test_src} DIRECTORY)
 
 		# Should we skip this test?
 		if(WIN32 AND ${testdir}/${name} IN_LIST WIN32_SKIP)
 			continue()
 		endif()
 
-		define_vala_test(${testdir}_${name} ${test_src}
-			DIRECTORY
-		)
+		# If this test has a CMakeLists.txt, use it instead
+		if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${test_dir}/CMakeLists.txt")
+			add_subdirectory("${test_dir}")
+		else()
+			define_vala_test(${testdir}_${name} ${test_src}
+				DIRECTORY ${testdir}
+			)
+		endif()
 	endforeach()
 endforeach()
