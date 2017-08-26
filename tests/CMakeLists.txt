@@ -53,7 +53,6 @@ function(define_vala_test target_name)
 	set(FLAGS
 		-g
 		-O0
-		-DGETTEXT_PACKAGE=valac
 		-Werror=return-type
 		-Werror=init-self
 		-Werror=implicit
@@ -121,6 +120,9 @@ function(define_vala_test target_name)
 	add_executable(${target_name} ${VALA_C})
 	target_include_directories(${target_name} PUBLIC ${INCLUDE_DIRS})
 	target_link_libraries(${target_name} ${LINK_LIBS})
+	target_compile_definitions(${target_name} PUBLIC
+		GETTEXT_PACKAGE="valac"
+	)
 
 	# Add this test to the "all tests" target
 	add_dependencies(${VALA_TESTS} ${target_name})
