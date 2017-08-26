@@ -133,7 +133,7 @@ public class Vala.CCodeAssignmentModule : CCodeMemberAccessModule {
 			lvalue.value_type.compatible (value.value_type) &&
 			st_left.is_simple_type() &&
 			lvalue.value_type is StructValueType &&
-			get_ccode_copy_function(st_left) != ""
+			st_left.has_attribute_argument ("CCode", "copy_function")
 		){
 			//copy_function (src, dest)
 			var copy_call = new CCodeFunctionCall (new CCodeIdentifier (get_ccode_copy_function (st_left)));
