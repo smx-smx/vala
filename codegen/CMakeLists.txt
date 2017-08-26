@@ -1,33 +1,4 @@
-set(CODEGEN_SOURCES
-	valaccodearraymodule.vala
-	valaccodeassignmentmodule.vala
-	valaccodeattribute.vala
-	valaccodebasemodule.vala
-	valaccodecompiler.vala
-	valaccodecontrolflowmodule.vala
-	valaccodedelegatemodule.vala
-	valaccodememberaccessmodule.vala
-	valaccodemethodcallmodule.vala
-	valaccodemethodmodule.vala
-	valaccodestructmodule.vala
-	valaclassregisterfunction.vala
-	valactype.vala
-	valaenumregisterfunction.vala
-	valagasyncmodule.vala
-	valagdbusclientmodule.vala
-	valagdbusmodule.vala
-	valagdbusservermodule.vala
-	valagerrormodule.vala
-	valagirwriter.vala
-	valagobjectmodule.vala
-	valagtkmodule.vala
-	valagsignalmodule.vala
-	valagtypemodule.vala
-	valagvariantmodule.vala
-	valainterfaceregisterfunction.vala
-	valastructregisterfunction.vala
-	valatyperegisterfunction.vala
-)
+file(GLOB_RECURSE CODEGEN_SOURCES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "*.vala")
 
 set(MODULE_NAME codegen)
 

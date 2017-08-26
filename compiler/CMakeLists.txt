@@ -1,6 +1,4 @@
-set(VALAC_SOURCES
-	valacompiler.vala
-)
+file(GLOB_RECURSE VALAC_SOURCES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "*.vala")
 
 set(MODULE_NAME valac)
 
