@@ -189,7 +189,7 @@ public struct uint {
 
 [SimpleType]
 [GIR (name = "gshort")]
-[CCode (cname = "gshort", cheader_filename = "glib.h", has_type_id = false, default_value = "0", type_signature = "n")]
+[CCode (cname = "gshort", cheader_filename = "glib.h", type_id = "G_TYPE_INT", marshaller_type_name = "INT", get_value_function = "g_value_get_int", set_value_function = "g_value_set_int", default_value = "0", type_signature = "n")]
 [IntegerType (rank = 4, min = -32768, max = 32767)]
 public struct short {
 	[CCode (cname = "G_MINSHORT")]
@@ -212,7 +212,7 @@ public struct short {
 
 [SimpleType]
 [GIR (name = "gushort")]
-[CCode (cname = "gushort", cheader_filename = "glib.h", has_type_id = false, default_value = "0U", type_signature = "q")]
+[CCode (cname = "gushort", cheader_filename = "glib.h", type_id = "G_TYPE_UINT", marshaller_type_name = "UINT", get_value_function = "g_value_get_uint", set_value_function = "g_value_set_uint", default_value = "0U", type_signature = "q")]
 [IntegerType (rank = 5, min = 0, max = 65535)]
 public struct ushort {
 	[CCode (cname = "0U")]
@@ -465,7 +465,7 @@ public struct uint8 {
 
 [SimpleType]
 [GIR (name = "gint16")]
-[CCode (cname = "gint16", cheader_filename = "glib.h", default_value = "0", type_signature = "n", has_type_id = false)]
+[CCode (cname = "gint16", cheader_filename = "glib.h", type_id = "G_TYPE_INT", marshaller_type_name = "INT", get_value_function = "g_value_get_int", set_value_function = "g_value_set_int", default_value = "0", type_signature = "n")]
 [IntegerType (rank = 4, min = -32768, max = 32767)]
 public struct int16 {
 	[Version (since = "2.4")]
@@ -504,7 +504,7 @@ public struct int16 {
 
 [SimpleType]
 [GIR (name = "guint16")]
-[CCode (cname = "guint16", cheader_filename = "glib.h", default_value = "0U", type_signature = "q", has_type_id = false)]
+[CCode (cname = "guint16", cheader_filename = "glib.h", type_id = "G_TYPE_UINT", marshaller_type_name = "UINT", get_value_function = "g_value_get_uint", set_value_function = "g_value_set_uint", default_value = "0U", type_signature = "q")]
 [IntegerType (rank = 5, min = 0, max = 65535)]
 public struct uint16 {
 	[CCode (cname = "0U")]
@@ -689,12 +689,14 @@ public struct int64 {
 	}
 
 	[Version (since = "2.12")]
-	public static bool try_parse (string str, out int64 result = null) {
+	public static bool try_parse (string str, out int64 result = null, out unowned string unparsed = null) {
 		char* endptr;
 		result = ascii_strtoll (str, out endptr, 0);
 		if (endptr == (char*) str + str.length) {
+			unparsed = "";
 			return true;
 		} else {
+			unparsed = (string) endptr;
 			return false;
 		}
 	}
@@ -745,12 +747,14 @@ public struct uint64 {
 	public static uint64 parse (string str) {
 		return ascii_strtoull (str, null, 0);
 	}
-	public static bool try_parse (string str, out uint64 result = null) {
+	public static bool try_parse (string str, out uint64 result = null, out unowned string unparsed = null) {
 		char* endptr;
 		result = ascii_strtoull (str, out endptr, 0);
 		if (endptr == (char*) str + str.length) {
+			unparsed = "";
 			return true;
 		} else {
+			unparsed = (string) endptr;
 			return false;
 		}
 	}
@@ -885,12 +889,14 @@ public struct double {
 	public static double parse (string str) {
 		return ascii_strtod (str, null);
 	}
-	public static bool try_parse (string str, out double result = null) {
+	public static bool try_parse (string str, out double result = null, out unowned string unparsed = null) {
 		char* endptr;
 		result = ascii_strtod (str, out endptr);
 		if (endptr == (char*) str + str.length) {
+			unparsed = "";
 			return true;
 		} else {
+			unparsed = (string) endptr;
 			return false;
 		}
 	}
@@ -1749,8 +1755,7 @@ namespace GLib {
 		public bool wait (Cond cond, Mutex mutex);
 		public bool prepare (out int priority);
 		public int query (int max_priority, out int timeout_, PollFD[] fds);
-		[CCode (array_length = false)]
-		public int check (int max_priority, PollFD[] fds, int n_fds);
+		public bool check (int max_priority, PollFD[] fds);
 		public void dispatch ();
 		public void set_poll_func (PollFunc func);
 		public PollFunc get_poll_func ();
@@ -2580,6 +2585,8 @@ namespace GLib {
 	/* Character Set Conversions */
 
 	public static string convert (string str, ssize_t len, string to_codeset, string from_codeset, out size_t bytes_read = null, out size_t bytes_written = null) throws ConvertError;
+	public static string convert_with_fallback (string str, ssize_t len, string to_codeset, string from_codeset, string? fallback = null, out size_t bytes_read = null, out size_t bytes_written = null) throws ConvertError;
+	public static string convert_with_iconv (string str, ssize_t len, IConv converter, out size_t bytes_read = null, out size_t bytes_written = null) throws ConvertError;
 	public static bool get_charset (out unowned string charset);
 	public static bool get_filename_charsets ([CCode (array_length = false, array_null_terminated = true)] out unowned string[] charsets);
 
@@ -2773,6 +2780,8 @@ namespace GLib {
 	[CCode (type_id = "G_TYPE_DATE")]
 	public struct Date {
 		public void clear (uint n_dates = 1);
+		[Version (since = "2.56")]
+		public Date copy ();
 		public void set_day (DateDay day);
 		public void set_month (DateMonth month);
 		public void set_year (DateYear year);
@@ -2892,6 +2901,8 @@ namespace GLib {
 		public DateTime.now (TimeZone tz);
 		public DateTime.now_local ();
 		public DateTime.now_utc ();
+		[Version (since = "2.56")]
+		public DateTime.from_iso8601 (string text, TimeZone default_tz);
 		public DateTime.from_unix_local (int64 t);
 		public DateTime.from_unix_utc (int64 t);
 		public DateTime.from_timeval_local (TimeVal tv);
@@ -3110,6 +3121,9 @@ namespace GLib {
 		public static string get_dirname (string file_name);
 		[CCode (cname = "g_build_filename")]
 		public static string build_filename (string first_element, ...);
+		[Version (since = "2.56")]
+		[CCode (cname = "g_build_filename_valist")]
+		public static string build_filename_valist (string first_element, va_list args);
 		[CCode (cname = "g_build_path")]
 		public static string build_path (string separator, string first_element, ...);
 
@@ -3755,7 +3769,7 @@ namespace GLib {
 		public bool get_ignore_unknown_options ();
 		[Version (since = "2.14")]
 		public string get_help (bool main_help, OptionGroup? group);
-		public void add_main_entries ([CCode (array_length = false)] OptionEntry[] entries, string? translation_domain);
+		public void add_main_entries ([CCode (array_length = false, array_null_terminated = true)] OptionEntry[] entries, string? translation_domain);
 		public void add_group (owned OptionGroup group);
 		public void set_main_group (owned OptionGroup group);
 		public unowned OptionGroup get_main_group ();
@@ -3814,7 +3828,7 @@ namespace GLib {
 #endif
 	public class OptionGroup {
 		public OptionGroup (string name, string description, string help_description, void* user_data = null, DestroyNotify? destroy = null);
-		public void add_entries ([CCode (array_length = false)] OptionEntry[] entries);
+		public void add_entries ([CCode (array_length = false, array_null_terminated = true)] OptionEntry[] entries);
 		public void set_parse_hooks (OptionParseFunc? pre_parse_func, OptionParseFunc? post_parse_hook);
 		public void set_error_hook (OptionErrorFunc? error_func);
 		public void set_translate_func (owned TranslateFunc? func);
@@ -4124,7 +4138,7 @@ namespace GLib {
 		public uint64 get_uint64 (string group_name, string key) throws KeyFileError;
 		[Version (since = "2.12")]
 		public double get_double (string group_name, string key) throws KeyFileError;
-		[CCode (array_length_type = "gsize")]
+		[CCode (array_length = true, array_length_type = "gsize", array_null_terminated = true)]
 		public string[] get_string_list (string group_name, string key) throws KeyFileError;
 		[CCode (array_length_type = "gsize")]
 		public string[] get_locale_string_list (string group_name, string key, string? locale = null) throws KeyFileError;
@@ -5351,6 +5365,7 @@ namespace GLib {
 		public const uint @2_50;
 		public const uint @2_52;
 		public const uint @2_54;
+		public const uint @2_56;
 
 		[CCode (cname = "glib_binary_age")]
 		public const uint binary_age;

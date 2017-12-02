@@ -155,11 +155,17 @@ namespace WebKit {
 	public class CookieManager : GLib.Object {
 		[CCode (has_construct_function = false)]
 		protected CookieManager ();
+		[Version (since = "2.20")]
+		public async bool add_cookie (Soup.Cookie cookie, GLib.Cancellable? cancellable) throws GLib.Error;
 		[Version (deprecated = true, deprecated_since = "2.16")]
 		public void delete_all_cookies ();
+		[Version (since = "2.20")]
+		public async bool delete_cookie (Soup.Cookie cookie, GLib.Cancellable? cancellable) throws GLib.Error;
 		[Version (deprecated = true, deprecated_since = "2.16")]
 		public void delete_cookies_for_domain (string domain);
 		public async WebKit.CookieAcceptPolicy get_accept_policy (GLib.Cancellable? cancellable) throws GLib.Error;
+		[Version (since = "2.20")]
+		public async GLib.List<Soup.Cookie> get_cookies (string uri, GLib.Cancellable? cancellable) throws GLib.Error;
 		[CCode (array_length = false, array_null_terminated = true)]
 		[Version (deprecated = true, deprecated_since = "2.16")]
 		public async string[] get_domains_with_cookies (GLib.Cancellable? cancellable) throws GLib.Error;
@@ -220,6 +226,16 @@ namespace WebKit {
 		protected EditorState ();
 		[Version (since = "2.10")]
 		public uint get_typing_attributes ();
+		[Version (since = "2.20")]
+		public bool is_copy_available ();
+		[Version (since = "2.20")]
+		public bool is_cut_available ();
+		[Version (since = "2.20")]
+		public bool is_paste_available ();
+		[Version (since = "2.20")]
+		public bool is_redo_available ();
+		[Version (since = "2.20")]
+		public bool is_undo_available ();
 		[Version (since = "2.10")]
 		public uint typing_attributes { get; }
 	}
@@ -350,6 +366,8 @@ namespace WebKit {
 		public WebKit.NavigationType get_navigation_type ();
 		[Version (since = "2.6")]
 		public unowned WebKit.URIRequest get_request ();
+		[Version (since = "2.20")]
+		public bool is_redirect ();
 		[Version (since = "2.6")]
 		public bool is_user_gesture ();
 	}
@@ -581,6 +599,10 @@ namespace WebKit {
 	public class Settings : GLib.Object {
 		[CCode (has_construct_function = false)]
 		public Settings ();
+		[Version (since = "2.20")]
+		public static uint32 font_size_to_pixels (uint32 points);
+		[Version (since = "2.20")]
+		public static uint32 font_size_to_points (uint32 pixels);
 		[Version (since = "2.10")]
 		public bool get_allow_file_access_from_file_urls ();
 		public bool get_allow_modal_dialogs ();
@@ -1092,7 +1114,7 @@ namespace WebKit {
 		public virtual signal bool load_failed_with_tls_errors (string failing_uri, GLib.TlsCertificate certificate, GLib.TlsCertificateFlags errors);
 		public virtual signal void mouse_target_changed (WebKit.HitTestResult hit_test_result, uint modifiers);
 		[CCode (cname = "show-option-menu")]
-		[Version (since = "2.18.")]
+		[Version (since = "2.18")]
 		public signal bool on_show_option_menu (WebKit.OptionMenu menu, Gdk.Event event, Gdk.Rectangle rectangle);
 		public virtual signal bool permission_request (WebKit.PermissionRequest permission_request);
 		public virtual signal bool print (WebKit.PrintOperation print_operation);
@@ -1165,10 +1187,16 @@ namespace WebKit {
 		public unowned string? get_local_storage_directory ();
 		[Version (since = "2.10")]
 		public unowned string? get_offline_application_cache_directory ();
+		[Version (since = "2.20")]
+		public unowned string? get_resource_load_statistics_directory ();
+		[Version (since = "2.20")]
+		public bool get_resource_load_statistics_enabled ();
 		[Version (since = "2.10")]
 		public unowned string? get_websql_directory ();
 		[Version (since = "2.16")]
 		public async bool remove (WebKit.WebsiteDataTypes types, GLib.List<WebKit.WebsiteData> website_data, GLib.Cancellable? cancellable) throws GLib.Error;
+		[Version (since = "2.20")]
+		public void set_resource_load_statistics_enabled (bool enabled);
 		[Version (since = "2.10")]
 		public string base_cache_directory { get; construct; }
 		[Version (since = "2.10")]
@@ -1184,6 +1212,8 @@ namespace WebKit {
 		public string local_storage_directory { get; construct; }
 		[Version (since = "2.10")]
 		public string offline_application_cache_directory { get; construct; }
+		[Version (since = "2.20")]
+		public string resource_load_statistics_directory { get; construct; }
 		[Version (since = "2.10")]
 		public string websql_directory { get; construct; }
 	}
@@ -1440,6 +1470,7 @@ namespace WebKit {
 		INDEXEDDB_DATABASES,
 		PLUGIN_DATA,
 		COOKIES,
+		RESOURCE_LOAD_STATISTICS,
 		ALL
 	}
 	[CCode (cheader_filename = "webkit2/webkit2.h", cprefix = "WEBKIT_DOWNLOAD_ERROR_")]

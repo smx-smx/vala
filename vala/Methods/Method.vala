@@ -347,7 +347,7 @@ public class Vala.Method : Subroutine, Callable {
 
 		var actual_base_type = base_method.return_type.get_actual_type (object_type, method_type_args, this);
 		if (!return_type.equals (actual_base_type)) {
-			invalid_match = "Base method expected return type `%s', but `%s' was provided".printf (actual_base_type.to_qualified_string (), return_type.to_qualified_string ());
+			invalid_match = "Base method expected return type `%s', but `%s' was provided".printf (actual_base_type.to_prototype_string (), return_type.to_prototype_string ());
 			return false;
 		}
 		
@@ -560,7 +560,8 @@ public class Vala.Method : Subroutine, Callable {
 				string invalid_match;
 				if (!compatible (base_method, out invalid_match)) {
 					error = true;
-					Report.error (source_reference, "overriding method `%s' is incompatible with base method `%s': %s.".printf (get_full_name (), base_method.get_full_name (), invalid_match));
+					var base_method_type = new MethodType (base_method);
+					Report.error (source_reference, "overriding method `%s' is incompatible with base method `%s': %s.".printf (get_full_name (), base_method_type.to_prototype_string (), invalid_match));
 					return;
 				}
 
@@ -606,7 +607,8 @@ public class Vala.Method : Subroutine, Callable {
 						string invalid_match = null;
 						if (!compatible (base_method, out invalid_match)) {
 							error = true;
-							Report.error (source_reference, "overriding method `%s' is incompatible with base method `%s': %s.".printf (get_full_name (), base_method.get_full_name (), invalid_match));
+							var base_method_type = new MethodType (base_method);
+							Report.error (source_reference, "overriding method `%s' is incompatible with base method `%s': %s.".printf (get_full_name (), base_method_type.to_prototype_string (), invalid_match));
 							return;
 						}
 						
@@ -618,7 +620,7 @@ public class Vala.Method : Subroutine, Callable {
 		}
 
 		if (base_interface_type != null) {
-			Report.error (source_reference, "%s: no suitable interface method found to implement".printf (get_full_name ()));
+			Report.error (source_reference, "`%s': no suitable interface method found to implement".printf (get_full_name ()));
 		}
 	}
 
@@ -773,7 +775,7 @@ public class Vala.Method : Subroutine, Callable {
 				return false;
 			}
 		} else if (overrides && base_method == null) {
-			Report.error (source_reference, "%s: no suitable method found to override".printf (get_full_name ()));
+			Report.error (source_reference, "`%s': no suitable method found to override".printf (get_full_name ()));
 		} else if ((is_abstract || is_virtual || overrides) && access == SymbolAccessibility.PRIVATE) {
 			error = true;
 			Report.error (source_reference, "Private member `%s' cannot be marked as override, virtual, or abstract".printf (get_full_name ()));

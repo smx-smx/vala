@@ -529,11 +529,28 @@ namespace GLib {
 	[CCode (get_value_function = "g_value_get_gtype", marshaller_type_name = "GTYPE", set_value_function = "g_value_set_gtype", type_id = "G_TYPE_GTYPE")]
 	[GIR (fullname = "GType")]
 	public struct Type : ulong {
+		public const GLib.Type BOOLEAN;
 		public const GLib.Type BOXED;
+		public const GLib.Type CHAR;
+		public const GLib.Type DOUBLE;
 		public const GLib.Type ENUM;
 		public const GLib.Type FLAGS;
+		public const GLib.Type FLOAT;
+		public const GLib.Type INT;
+		public const GLib.Type INT64;
 		public const GLib.Type INTERFACE;
 		public const GLib.Type INVALID;
+		public const GLib.Type LONG;
+		public const GLib.Type NONE;
+		public const GLib.Type OBJECT;
+		public const GLib.Type PARAM;
+		public const GLib.Type POINTER;
+		public const GLib.Type STRING;
+		public const GLib.Type UCHAR;
+		public const GLib.Type UINT;
+		public const GLib.Type UINT64;
+		public const GLib.Type ULONG;
+		public const GLib.Type VARIANT;
 		public void add_class_private (size_t private_size);
 		[CCode (array_length_type = "guint")]
 		public GLib.Type[] children ();
@@ -756,7 +773,9 @@ namespace GLib {
 		ACTION,
 		NO_HOOKS,
 		MUST_COLLECT,
-		DEPRECATED
+		DEPRECATED,
+		[CCode (cname = "G_SIGNAL_FLAGS_MASK")]
+		MASK
 	}
 	[CCode (cprefix = "G_SIGNAL_MATCH_", has_type_id = false)]
 	public enum SignalMatchType {
@@ -765,7 +784,8 @@ namespace GLib {
 		CLOSURE,
 		FUNC,
 		DATA,
-		UNBLOCKED
+		UNBLOCKED,
+		MASK
 	}
 	[CCode (cprefix = "G_TYPE_DEBUG_", has_type_id = false)]
 	[Flags]
@@ -834,4 +854,6 @@ namespace GLib {
 	public delegate void ValueTransform (GLib.Value src_value, ref GLib.Value dest_value);
 	[CCode (instance_pos = 0)]
 	public delegate void WeakNotify (GLib.Object object);
+	public static void source_set_closure (GLib.Source source, GLib.Closure closure);
+	public static void source_set_dummy_callback (GLib.Source source);
 }

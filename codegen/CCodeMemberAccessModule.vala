@@ -571,6 +571,14 @@ public abstract class Vala.CCodeMemberAccessModule : CCodeControlFlowModule {
 				}
 				inst = pub_inst;
 			}
+
+			if (inst == null) {
+				// FIXME Report this with proper source-reference on the vala side!
+				Report.error (field.source_reference, "Invalid access to instance member `%s'".printf (field.get_full_name ()));
+				result.cvalue = new CCodeInvalidExpression ();
+				return result;
+			}
+
 			if (instance_target_type.data_type.is_reference_type () || (instance != null && instance.value_type is PointerType)) {
 				result.cvalue = new CCodeMemberAccess.pointer (inst, get_ccode_name (field));
 			} else {
@@ -734,7 +742,7 @@ public abstract class Vala.CCodeMemberAccessModule : CCodeControlFlowModule {
 			// special handling for types such as va_list
 			use_temp = false;
 		}
-		if (variable is Parameter && variable.name == "this") {
+		if (variable is Parameter && (variable.name == "this" || ((Parameter) variable).direction != ParameterDirection.OUT)) {
 			use_temp = false;
 		}
 		if (variable.single_assignment && !result.value_type.is_real_non_null_struct_type ()) {

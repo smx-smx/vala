@@ -184,12 +184,16 @@ namespace Gst {
 			public Gst.Video.CodecFrame get_frame (int frame_number);
 			public GLib.List<Gst.Video.CodecFrame> get_frames ();
 			public void get_latency (out Gst.ClockTime min_latency, out Gst.ClockTime max_latency);
+			[Version (since = "1.14")]
+			public Gst.ClockTimeDiff get_max_encode_time (Gst.Video.CodecFrame frame);
 			public Gst.Video.CodecFrame get_oldest_frame ();
 			public Gst.Video.CodecState get_output_state ();
 			[NoWrapper]
 			public virtual Gst.Caps getcaps (Gst.Caps filter);
 			[NoWrapper]
 			public virtual Gst.FlowReturn handle_frame (Gst.Video.CodecFrame frame);
+			[Version (since = "1.14")]
+			public bool is_qos_enabled ();
 			public void merge_tags (Gst.TagList? tags, Gst.TagMergeMode mode);
 			public virtual bool negotiate ();
 			[NoWrapper]
@@ -207,6 +211,8 @@ namespace Gst {
 			public void set_latency (Gst.ClockTime min_latency, Gst.ClockTime max_latency);
 			public void set_min_pts (Gst.ClockTime min_pts);
 			public Gst.Video.CodecState set_output_state (owned Gst.Caps caps, Gst.Video.CodecState? reference);
+			[Version (since = "1.14")]
+			public void set_qos_enabled (bool enabled);
 			[NoWrapper]
 			public virtual bool sink_event (Gst.Event event);
 			[NoWrapper]
@@ -221,6 +227,8 @@ namespace Gst {
 			public virtual bool stop ();
 			[NoWrapper]
 			public virtual bool transform_meta (Gst.Video.CodecFrame frame, Gst.Meta meta);
+			[NoAccessorMethod]
+			public bool qos { get; set; }
 		}
 		[CCode (cheader_filename = "gst/video/video.h", type_id = "gst_video_filter_get_type ()")]
 		[GIR (name = "VideoFilter")]

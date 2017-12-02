@@ -1926,6 +1926,7 @@ namespace Gtk {
 		public virtual signal void icon_press (Gtk.EntryIconPosition p0, Gdk.Event p1);
 		public virtual signal void icon_release (Gtk.EntryIconPosition p0, Gdk.Event p1);
 		public virtual signal void insert_at_cursor (string str);
+		public virtual signal void insert_emoji ();
 		public virtual signal void move_cursor (Gtk.MovementStep step, int count, bool extend_selection);
 		public virtual signal void paste_clipboard ();
 		public virtual signal void populate_popup (Gtk.Menu popup);
@@ -3825,6 +3826,7 @@ namespace Gtk {
 		public bool get_show_enter_location ();
 		public bool get_show_other_locations ();
 		public bool get_show_recent ();
+		public bool get_show_starred_location ();
 		public bool get_show_trash ();
 		public GLib.SList<GLib.File> list_shortcuts ();
 		public void remove_shortcut (GLib.File location);
@@ -3837,6 +3839,7 @@ namespace Gtk {
 		public void set_show_enter_location (bool show_enter_location);
 		public void set_show_other_locations (bool show_other_locations);
 		public void set_show_recent (bool show_recent);
+		public void set_show_starred_location (bool show_starred_location);
 		public void set_show_trash (bool show_trash);
 		public bool local_only { get; set; }
 		public GLib.File location { owned get; set; }
@@ -3848,15 +3851,18 @@ namespace Gtk {
 		public bool show_enter_location { get; set; }
 		public bool show_other_locations { get; set; }
 		public bool show_recent { get; set; }
+		public bool show_starred_location { get; set; }
 		public bool show_trash { get; set; }
 		public virtual signal int drag_action_ask (int p0);
 		public virtual signal int drag_action_requested (Gdk.DragContext p0, GLib.File p1, GLib.List<GLib.File> p2);
 		public virtual signal void drag_perform_drop (GLib.File p0, GLib.List<GLib.File> p1, int p2);
 		public virtual signal void mount (GLib.MountOperation p0);
+		[CCode (cname = "show-starred-location")]
+		public virtual signal void on_show_starred_location (Gtk.PlacesOpenFlags p0);
 		public virtual signal void open_location (GLib.File p0, Gtk.PlacesOpenFlags p1);
 		public virtual signal void populate_popup (Gtk.Menu p0, GLib.File? p1, GLib.Volume? p2);
 		public virtual signal void show_error_message (string p0, string p1);
-		[CCode (cname = "show_other_locations")]
+		[CCode (cname = "show-other-locations")]
 		[Version (experimental = true)]
 		public virtual signal void show_other_locations_requested ();
 		public virtual signal void show_other_locations_with_flags (Gtk.PlacesOpenFlags p0);
@@ -5873,6 +5879,7 @@ namespace Gtk {
 		public virtual signal void delete_from_cursor (Gtk.DeleteType type, int count);
 		public virtual signal bool extend_selection (Gtk.TextExtendSelection granularity, Gtk.TextIter location, Gtk.TextIter start, Gtk.TextIter end);
 		public virtual signal void insert_at_cursor (string str);
+		public virtual signal void insert_emoji ();
 		public virtual signal void move_cursor (Gtk.MovementStep step, int count, bool extend_selection);
 		public virtual signal void move_viewport (Gtk.ScrollStep p0, int p1);
 		public virtual signal void paste_clipboard ();
@@ -7263,11 +7270,11 @@ namespace Gtk {
 		public bool urgency_hint { get; set; }
 		[NoAccessorMethod]
 		public Gtk.WindowPosition window_position { get; set; }
-		[CCode (cname = "activate_default")]
+		[CCode (cname = "activate-default")]
 		[Version (experimental = true)]
 		public virtual signal void default_activated ();
 		public virtual signal bool enable_debugging (bool toggle);
-		[CCode (cname = "activate_focus")]
+		[CCode (cname = "activate-focus")]
 		[Version (experimental = true)]
 		public virtual signal void focus_activated ();
 		public virtual signal void keys_changed ();
@@ -8247,7 +8254,9 @@ namespace Gtk {
 		UPPERCASE_WORDS,
 		UPPERCASE_SENTENCES,
 		INHIBIT_OSK,
-		VERTICAL_WRITING
+		VERTICAL_WRITING,
+		EMOJI,
+		NO_EMOJI
 	}
 	[CCode (cheader_filename = "gtk/gtk.h", cprefix = "GTK_INPUT_PURPOSE_")]
 	public enum InputPurpose {

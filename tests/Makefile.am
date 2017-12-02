@@ -47,6 +47,8 @@ TESTS = \
 	basic-types/bug771626.test \
 	basic-types/bug772426.vala \
 	basic-types/bug777697.test \
+	basic-types/bug787152.vala \
+	basic-types/bug788775.vala \
 	chainup/class-base.vala \
 	chainup/class-base-foo.vala \
 	chainup/class-object.vala \
@@ -95,6 +97,7 @@ TESTS = \
 	methods/bug774060.vala \
 	methods/bug775466.test \
 	methods/bug781061.vala \
+	methods/bug784691.vala \
 	methods/generics.vala \
 	methods/printf-invalid.test \
 	methods/printf-constructor.vala \
@@ -114,9 +117,11 @@ TESTS = \
 	control-flow/bug691514.vala	\
 	control-flow/bug736774-1.vala \
 	control-flow/bug736774-2.vala \
+	control-flow/bug790903.test \
 	enums/enum_only.vala \
 	enums/enums.vala \
 	enums/flags.vala \
+	enums/bug666035.vala \
 	enums/bug673879.vala \
 	enums/bug763831.vala \
 	enums/bug780050.vala \
@@ -151,10 +156,12 @@ TESTS = \
 	structs/bug690380.vala \
 	structs/bug694140.vala \
 	structs/bug749952.vala \
+	structs/bug764041.test \
 	structs/bug775761.vala \
 	structs/bug777194.vala \
 	delegates/casting.vala \
 	delegates/delegates.vala \
+	delegates/delegates-error.test \
 	delegates/reference_transfer.vala \
 	delegates/bug539166.vala \
 	delegates/bug595610.vala \
@@ -177,11 +184,13 @@ TESTS = \
 	objects/properties.vala \
 	objects/regex.vala \
 	objects/signals.vala \
+	objects/signals-delegate.vala \
 	objects/test-025.vala \
 	objects/test-026.vala \
 	objects/test-029.vala \
 	objects/test-034.vala \
 	objects/bug566909.vala \
+	objects/bug587905.test \
 	objects/bug588203.vala \
 	objects/bug589928.vala \
 	objects/bug593260.vala \
@@ -238,6 +247,7 @@ TESTS = \
 	objects/bug779219.vala \
 	objects/bug779955.vala \
 	objects/bug783897.vala \
+	objects/bug788964.vala \
 	errors/errors.vala \
 	errors/bug567181.vala \
 	errors/bug579101.vala \
@@ -296,6 +306,7 @@ TESTS = \
 	gir/bug651773.test \
 	gir/bug667751.test \
 	gir/bug742012.test \
+	gir/bug788775.test \
 	gir/array-fixed-length.test \
 	gir/delegate-alias-without-target.test \
 	annotations/deprecated.vala \

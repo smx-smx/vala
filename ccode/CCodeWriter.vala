@@ -178,6 +178,13 @@ public class Vala.CCodeWriter {
 	}
 	
 	/**
+	 * Writes n spaces.
+	 */
+	public void write_nspaces (uint n) {
+		stream.puts (string.nfill (n, ' '));
+	}
+
+	/**
 	 * Writes the specified string.
 	 *
 	 * @param s a string

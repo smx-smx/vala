@@ -1,3 +1,90 @@
+Vala 0.39.1
+===========
+ * Highlights
+  - Report warning if property-type is not compatible with GLib.Object [#693932]
+  - Allow to pass compatible delegates to signal.connect() [#787521]
+  - Allow unscoped enum values where possible
+  - Avoid use of temp-var for some callables returning ValueType
+    and to access in/ref parameters [#789071]
+  - Reformat generated source declarations and definitions for better
+    readability [#688447]
+
+ * Various bug fixes:
+  - Use array_length_cexpr to support fixed-arrays for return-values [#784691]
+  - Properly parse arguments for vala interpeter-mode [#663070]
+  - Enforce name-length >= 3 for structs using GType [#764041]
+  - Report error for missing type-parameter on enclosing type [#587905]
+  - Add boolean "use_inplace" ccode-attribute for methods [#750840]
+  - Improve handling of unowned/owned keyword occurrences
+  - Methods need to throw compatible error if target delegate throws one
+  - Discover invalid member access to instance field [#790903]
+  - Improve error output of mismatching overriding methods
+
+ * Valadoc
+  - Acknowledge possible properties in structs [#784705]
+  - Fix fatal typo in GtkdocRenderer.visit_symbol_link() [#790266]
+
+ * Bindings:
+  - glib-2.0: Use type-id/marshaller-type for (u)int16/(u)short from (u)int32
+    [#693932]
+  - glib-2.0: Add optional 'unparsed' parameter to *.try_parse () [#774124]
+  - gobject-2.0: Add some missing symbols
+  - gstreamer-1.0: Bind GST_TIME_ARGS, GST_STIME_ARGS macros [#750840]
+  - gstreamer-1.0: Bind GST_DEBUG_BIN_TO_DOT_FILE/*_WITH_TS [#785215]
+  - gstreamer-1.0: Update from 1.13+ git master
+  - gtk+-3.0: Update to 3.22.26+9ce824d3
+  - gtk+-4.0: Split Gsk.RenderNode into several classes
+  - gtk+-4.0: Update to 3.93.0+2d797dd8
+  - webkit2gtk-4.0: Update to 2.19.2
+
+Vala 0.38.3
+===========
+ * Various bug fixes:
+  - codegen: Prioritize "array_length=true" over "array_null_terminated=true"
+    [#788775]
+  - codegen: Avoid possible conflicts with internal property/signal defines
+    [#788964]
+
+ * Bindings:
+  - gio-2.0: Expose g_task_get_source_object as Task.get_unowned_source_object
+  - gstreamer-1.0: Update from 1.13+ git master
+  - gtk+-4.0: Update to 3.92.1
+  - libxml-2.0: Add DTD methods [#789442]
+
+Vala 0.38.2
+===========
+ * Various bindings updates:
+  - gstreamer-1.0,gtk+-3.0,gtk+-4.0: Update from git master
+  - gnutls: Fix free_function ccode-attribute of Certificate [#788181]
+
+Vala 0.38.1
+===========
+ * Various bug fixes:
+  - valadoc: Don't use 'stderr' as variable name [#787305]
+  - codegen: Try to use a more unique internal define for properties [#787436]
+  - vala: Update list of used attributes
+  - method: Use prototype-string for error-reports of return-type mismatches
+
+ * Bindings:
+  - glib-2.0: Fix MainContext.check(),
+      OptionEntry[] params are null-terminated,
+      Bind g_convert_with_fallback() and g_convert_with_iconv()
+
+Vala 0.38.0
+===========
+ * Various bug fixes:
+  - Improve error output for incompatible method signatures
+    (Add CallableType as base for DelegateType, MethodType, SignalType)
+  - codegen:
+    + Initialize temp-variable for fixed-size arrays to zero first [#787152]
+    + Add support for "type-func" in ui-files [#787033]
+
+ * Bindings:
+  - gtk+-3.0,gtk+-4.0: Update
+  - libxml-2.0: Bind xmlLastElementChild and xmlPreviousElementSibling
+  - pangocairo: CairoFontMap.set_default() is not an instance method
+  - gio-2.0: Application.set_default() is not an instance method
+
 Vala 0.37.91
 ============
  * Various bug fixes:
